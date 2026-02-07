@@ -58,15 +58,41 @@
 - [ ] Add parameter validation for all methods
 - [ ] Add comprehensive docstrings
 
-## Phase 7: Testing
+## Phase 7: Unit Tests
 
-- [ ] Write unit tests for RobotController
-- [ ] Write integration tests with mock robot
-- [ ] Test obstacle detection during movement
-- [ ] Test camera control sequences
-- [ ] Test error handling and recovery
-- [ ] Test connection lifecycle
-- [ ] Verify thread safety of concurrent operations
+- [ ] Write unit tests for protocol.py (command building and parsing)
+- [ ] Write unit tests for Connection class with mock sockets
+- [ ] Write unit tests for HeartbeatMonitor with mock connection
+- [ ] Write unit tests for RobotController movement methods
+- [ ] Write unit tests for RobotController camera methods
+- [ ] Write unit tests for RobotController sensor methods
+- [ ] Write unit tests for exception handling
+- [ ] Write unit tests for parameter validation
+- [ ] Achieve >90% code coverage
+
+## Phase 8: Integration Tests
+
+- [ ] Create mock robot server for integration testing
+- [ ] Write integration test for connection lifecycle
+- [ ] Write integration test for forward movement with obstacle detection
+- [ ] Write integration test for backward movement
+- [ ] Write integration test for rotation commands
+- [ ] Write integration test for camera control sequences
+- [ ] Write integration test for heartbeat protocol
+- [ ] Write integration test for error recovery
+- [ ] Write integration test for concurrent operations
+- [ ] Verify thread safety under load
+
+## Phase 9: Example-Based Tests
+
+- [ ] Create basic_movement.py example
+- [ ] Add pytest test that runs basic_movement.py against mock robot
+- [ ] Create obstacle_avoidance.py example
+- [ ] Add pytest test that runs obstacle_avoidance.py against mock robot
+- [ ] Create camera_scan.py example
+- [ ] Add pytest test that runs camera_scan.py against mock robot
+- [ ] Verify all examples execute without errors
+- [ ] Add comments and documentation to examples
 
 ## Phase 8: Examples
 
@@ -75,7 +101,7 @@
 - [ ] Create camera_scan.py example
 - [ ] Add comments and documentation to examples
 
-## Phase 9: Documentation
+## Phase 10: Documentation
 
 - [ ] Update README.md with installation instructions
 - [ ] Add API reference documentation
@@ -83,7 +109,7 @@
 - [ ] Document protocol details
 - [ ] Add troubleshooting section
 
-## Phase 10: Package Distribution
+## Phase 11: Package Distribution
 
 - [ ] Test local installation with `pip install -e .`
 - [ ] Verify package imports correctly

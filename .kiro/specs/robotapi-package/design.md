@@ -206,9 +206,12 @@ Controller -> User: return image_bytes
 - Minimal overhead for heartbeat monitoring
 
 ### Testing Strategy
-- Mock socket for unit tests
-- Integration tests with simulated robot
-- Real robot tests for validation
+- **Unit tests**: Mock socket for isolated component testing
+- **Integration tests**: Mock robot server simulating real protocol
+- **Example-based tests**: Run examples against mock robot to verify real-world usage
+- **Coverage target**: >90% code coverage
+- **Test fixtures**: Reusable mock robot server in conftest.py
+- **CI/CD**: All tests run on every commit
 
 ## Package Structure
 
@@ -228,10 +231,21 @@ robotapi/
 │   └── exceptions.py
 ├── tests/
 │   ├── __init__.py
-│   ├── test_controller.py
-│   ├── test_connection.py
-│   ├── test_protocol.py
-│   └── test_heartbeat.py
+│   ├── conftest.py             # Pytest fixtures (mock robot server)
+│   ├── test_controller.py      # Unit tests
+│   ├── test_connection.py      # Unit tests
+│   ├── test_protocol.py        # Unit tests
+│   ├── test_heartbeat.py       # Unit tests
+│   ├── integration/
+│   │   ├── __init__.py
+│   │   ├── test_movement.py    # Integration tests
+│   │   ├── test_camera.py      # Integration tests
+│   │   └── test_sensors.py     # Integration tests
+│   └── examples/
+│       ├── __init__.py
+│       ├── test_basic_movement.py
+│       ├── test_obstacle_avoidance.py
+│       └── test_camera_scan.py
 └── examples/
     ├── basic_movement.py
     ├── obstacle_avoidance.py
@@ -247,10 +261,35 @@ install_requires = []  # No external dependencies for core
 # Development dependencies
 dev_requires = [
     "pytest>=7.0",
+    "pytest-cov>=4.0",      # Coverage reporting
+    "pytest-asyncio>=0.21",  # Async test support
     "black>=22.0",
     "isort>=5.0",
     "mypy>=0.990"
 ]
+```
+
+## Test Infrastructure
+
+### Mock Robot Server (conftest.py)
+
+Pytest fixture providing simulated robot for testing:
+
+```python
+@pytest.fixture
+def mock_robot_server():
+    """Start mock TCP server simulating robot protocol"""
+    server = MockRobotServer(port=10100)
+    server.start()
+    yield server
+    server.stop()
+
+class MockRobotServer:
+    """Simulates robot TCP protocol for testing"""
+    - Responds to heartbeats
+    - Simulates obstacle detection
+    - Tracks command history
+    - Configurable responses
 ```
 
 ## Configuration
